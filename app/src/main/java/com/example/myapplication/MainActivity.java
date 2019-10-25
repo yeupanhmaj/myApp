@@ -1,60 +1,30 @@
 package com.example.myapplication;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.viewpager.widget.ViewPager;
-
-import android.net.wifi.hotspot2.pps.HomeSp;
 import android.os.Bundle;
-import android.view.MenuItem;
-import android.widget.Toast;
 
-import com.example.myapplication.adapter.SectionsPagerAdapter;
-import com.example.myapplication.ui.FragmentFavorite;
-import com.example.myapplication.ui.FragmentHome;
-import com.example.myapplication.ui.FragmentUser;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
+
 public class MainActivity extends AppCompatActivity {
-    private SectionsPagerAdapter sectionPagerAdapter;
-    private ViewPager viewPager;
-    private BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-         bottomNavigationView = findViewById(R.id.bot_menu);
-         bottomNavigationView.setOnNavigationItemSelectedListener(nav);
+        BottomNavigationView navView = findViewById(R.id.nav_view);
+        // Passing each menu ID as a set of Ids because each
+        // menu should be considered as top level destinations.
+        AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
+                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                .build();
+        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment);
+        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
+        NavigationUI.setupWithNavController(navView, navController);
+    }
 
-        viewPager = findViewById(R.id.container);
-        setupViewPager(viewPager);
-    }
-    private BottomNavigationView.OnNavigationItemSelectedListener nav =
-            new BottomNavigationView.OnNavigationItemSelectedListener() {
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
-            switch (menuItem.getItemId())
-            {
-                case R.id.nav_home:
-                    viewPager.setCurrentItem(0);
-                    break;
-                case R.id.nav_user:
-                    viewPager.setCurrentItem(2);
-                    break;
-                case R.id.nav_favorite:
-                    viewPager.setCurrentItem(1);
-                    break;
-            }
-            return true;
-        }
-    };
-    private void setupViewPager(ViewPager viewPager)
-    {
-        SectionsPagerAdapter adapter = new SectionsPagerAdapter(getSupportFragmentManager());
-        adapter.addFragment(new FragmentHome(),"Home");
-        adapter.addFragment(new FragmentFavorite(),"Favorite");
-        adapter.addFragment(new FragmentUser(),"User");
-        viewPager.setAdapter(adapter);
-    }
 }
