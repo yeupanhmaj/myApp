@@ -36,25 +36,30 @@
             android:orientation="vertical"
             android:paddingTop="30dp">
 
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:drawableTint="#FF4081"
-                    android:singleLine="true"
-                    android:hint="User Name"
-                    android:inputType="textEmailAddress" />
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:drawableTint="#FF4081"
+                android:singleLine="true"
+                android:hint="User Name"
+                android:inputType="textEmailAddress" />
 
 
-                <EditText
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="16dp"
-                    android:singleLine="true"
-                    android:drawableTint="#FF4081"
-                    android:hint="Password"
-                    android:inputType="text" />
+            <EditText
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:singleLine="true"
+                android:drawableTint="#FF4081"
+                android:hint="Password"
+                android:inputType="textPassword" />
 
-
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="right"
+                android:paddingTop="5dp"
+                android:text="Don't have account, register now" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
