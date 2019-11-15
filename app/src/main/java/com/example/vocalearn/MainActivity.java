@@ -5,17 +5,32 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProviders;
 
+import android.content.Context;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.example.vocalearn.Entity.Words;
+import com.example.vocalearn.Repositorys.WordReposiroty;
+import com.example.vocalearn.ViewModel.WordsViewModel;
 import com.example.vocalearn.fragment.Home;
 import com.example.vocalearn.fragment.Search;
 import com.example.vocalearn.fragment.Test;
 import com.example.vocalearn.fragment.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.util.List;
+
 public class MainActivity extends AppCompatActivity {
+    private WordsViewModel wordsViewModel;
     BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,7 +39,17 @@ public class MainActivity extends AppCompatActivity {
         swapFragment(new Home());
         addControll();
         addEvent();
+        wordsViewModel  = ViewModelProviders.of(this).get(WordsViewModel.class);
+        wordsViewModel.getAllWword().observe(this, new Observer<List<Words>>() {
+            @Override
+            public void onChanged(List<Words> words) {
+                //update recycle view later
+                Toast.makeText(MainActivity.this,"onChanged",Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
+
     private void addControll()
     {
         bottomNavigationView= findViewById(R.id.bot_nav);
@@ -64,4 +89,5 @@ public class MainActivity extends AppCompatActivity {
         fragmentTransaction.replace(R.id.fragment_main, fragment);
         fragmentTransaction.commit();
     }
+
 }
