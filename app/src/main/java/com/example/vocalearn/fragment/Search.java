@@ -17,37 +17,42 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vocalearn.CustomAdapter.WordsAdapter;
+import com.example.vocalearn.Databases.WordsDAO;
 import com.example.vocalearn.Entity.Words;
 import com.example.vocalearn.Main2Activity;
 import com.example.vocalearn.R;
-import com.example.vocalearn.ViewModel.WordsViewModel;
+
 
 import java.util.List;
 
 public class Search extends Fragment {
-    private WordsViewModel wordsViewModel;
+
     private RecyclerView recyclerView;
+    WordsDAO dbAccess;
     @Nullable
     EditText txtSearch;
+    private List<Words> mylist;
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View root = inflater.inflate(R.layout.fragment_search, container, false);
         txtSearch = root.findViewById(R.id.txtSearch);
         recyclerView = root.findViewById(R.id.rclWords);
-
+        getData();
         recyclerView.setLayoutManager(new LinearLayoutManager(container.getContext()));
+        recyclerView.setHasFixedSize(true);
         final WordsAdapter wordsAdapter = new WordsAdapter();
+        wordsAdapter.setWords(mylist);
         recyclerView.setAdapter(wordsAdapter);
 
-        wordsViewModel  = ViewModelProviders.of(getActivity()).get(WordsViewModel.class);
-        wordsViewModel.getAllWword().observe(getActivity(), new Observer<List<Words>>() {
-            @Override
-            public void onChanged(List<Words> words) {
-                //update recycle view later
-                wordsAdapter.setWords(words);
-
-            }
-        });
         return root;
+    }
+    private void getData()
+    {
+        dbAccess = dbAccess.getInstance(getActivity().getApplicationContext());
+        dbAccess.openDB();
+
+        mylist = dbAccess.getAllWords();
+
+        dbAccess.closeDB();
     }
 }

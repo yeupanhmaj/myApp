@@ -33,6 +33,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtWord"
+            android:ellipsize="end"
             android:text="ghi chu 1"/>
 
     </RelativeLayout>
