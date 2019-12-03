@@ -1,4 +1,4 @@
-package com.example.vocalearn.question;
+package com.example.vocalearn.Entity;
 
 import android.os.Parcel;
 import android.os.Parcelable;

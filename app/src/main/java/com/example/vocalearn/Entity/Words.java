@@ -1,12 +1,15 @@
 package com.example.vocalearn.Entity;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
 import java.io.Serializable;
 @Entity(tableName = "Words_table")
-public class Words {
+public class Words implements Parcelable {
     @PrimaryKey()@NonNull
     private String Tu;
 
@@ -28,6 +31,26 @@ public class Words {
 
     public Words() {
     }
+
+    protected Words(Parcel in) {
+        Tu = in.readString();
+        PhatAm = in.readString();
+        Nghia = in.readString();
+        Ghichu = in.readString();
+        Status = in.readString();
+    }
+
+    public static final Creator<Words> CREATOR = new Creator<Words>() {
+        @Override
+        public Words createFromParcel(Parcel in) {
+            return new Words(in);
+        }
+
+        @Override
+        public Words[] newArray(int size) {
+            return new Words[size];
+        }
+    };
 
     public String getTu() {
         return Tu;
@@ -67,5 +90,19 @@ public class Words {
 
     public void setStatus(String status) {
         Status = status;
+    }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(Tu);
+        parcel.writeString(PhatAm);
+        parcel.writeString(Nghia);
+        parcel.writeString(Ghichu);
+        parcel.writeString(Status);
     }
 }

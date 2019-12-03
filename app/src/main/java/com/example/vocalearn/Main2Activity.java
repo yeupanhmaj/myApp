@@ -15,7 +15,7 @@ import com.example.vocalearn.Entity.Words;
 
 import java.util.List;
 
-public class Main2Activity extends AppCompatActivity {
+public class Main2Activity extends AppCompatActivity implements WordsAdapter.OnWordClickListener{
 
     private RecyclerView recyclerView;
     private WordsDAO dbAccess;
@@ -34,10 +34,15 @@ public class Main2Activity extends AppCompatActivity {
 
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setHasFixedSize(true);
-        final WordsAdapter wordsAdapter = new WordsAdapter();
+        final WordsAdapter wordsAdapter = new WordsAdapter(this);
         wordsAdapter.setWords(mylist);
         recyclerView.setAdapter(wordsAdapter);
 
+
+    }
+
+    @Override
+    public void onItemClick(int position) {
 
     }
 }

@@ -1,4 +1,4 @@
-package com.example.vocalearn.question;
+package com.example.vocalearn.Entity;
 
 public class Category {public static final int PROGRAMMING = 1;
     public static final int GEOGRAPHY = 2;

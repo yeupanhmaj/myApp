@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginEnd="8dp"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp">
+    <RelativeLayout
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:layout_marginBottom="10dp">
+
+        <TextView
+            android:id="@+id/Nghia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Tu"
+            android:layout_alignParentEnd="false"
+            android:layout_centerHorizontal="true"
+            android:text="Nghia"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/Tu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="false"
+            android:layout_centerHorizontal="true"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Tu"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:textSize="40sp" />
+
+        <TextView
+            android:id="@+id/GhiChu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/imageButton"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large"
+            android:text="ghi chu"/>
+
+        <ImageButton
+            android:id="@+id/imageButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/Nghia"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/ic_speech"
+            android:enabled="false"
+            android:focusable="false" />
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

@@ -5,6 +5,9 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.vocalearn.Entity.Category;
+import com.example.vocalearn.Entity.Question;
 import com.example.vocalearn.question.QuizContract.*;
 
 import java.util.ArrayList;

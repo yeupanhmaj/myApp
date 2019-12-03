@@ -14,12 +14,11 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.vocalearn.question.Question;
+import com.example.vocalearn.Entity.Question;
 import com.example.vocalearn.question.QuizDbHelper;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.List;
 import java.util.Locale;
 
 public class QuizActivity extends AppCompatActivity {

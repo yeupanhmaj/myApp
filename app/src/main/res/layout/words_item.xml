@@ -6,6 +6,7 @@
     android:layout_marginStart="8dp"
     android:layout_marginTop="8dp">
     <RelativeLayout
+        android:id="@+id/item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="8dp">
@@ -14,27 +15,27 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:text="Nghia 1"
+            android:text="Nghia"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             />
         <TextView
             android:id="@+id/txtWord"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Tu 1"
+            android:text="Tu"
             android:maxLines="1"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:layout_toStartOf="@id/txtNghia"
             android:layout_alignParentStart="true"
             android:ellipsize="end"
             />
+
         <TextView
-            android:id="@+id/txtGhiChu"
+            android:layout_below="@id/txtNghia"
+            android:layout_alignParentEnd="true"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@id/txtWord"
-            android:ellipsize="end"
-            android:text="ghi chu 1"/>
+            android:text="Bấm để xem thêm" />
 
     </RelativeLayout>
 

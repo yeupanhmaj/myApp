@@ -11,8 +11,8 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.vocalearn.question.Category;
-import com.example.vocalearn.question.Question;
+import com.example.vocalearn.Entity.Category;
+import com.example.vocalearn.Entity.Question;
 import com.example.vocalearn.question.QuizDbHelper;
 
 import java.util.List;
