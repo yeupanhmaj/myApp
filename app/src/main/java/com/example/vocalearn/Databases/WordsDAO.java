@@ -61,4 +61,25 @@ public class WordsDAO {
         c.close();
         return questionList;
     }
+    public Words getRandom(String ChuDe)
+    {
+        Words questionList = new Words();
+        String query ="SELECT * FROM TuDien WHERE ChuDe="+"'"+ ChuDe +"'" +" ORDER BY random() LIMIT 1";
+        db = openHelper.getReadableDatabase();
+        c= db.rawQuery(query,null);
+        if (c.moveToFirst()) {
+            do {
+                Words temp = new Words();
+                temp.setTu(c.getString(0));
+                temp.setPhatAm(c.getString(1));
+                temp.setNghia(c.getString(2));
+                temp.setGhichu(c.getString(3));
+                temp.setStatus(c.getString(4));
+                questionList=(temp);
+            } while (c.moveToNext());
+        }
+
+        c.close();
+        return questionList;
+    }
 }

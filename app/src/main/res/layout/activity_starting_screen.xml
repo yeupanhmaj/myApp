@@ -9,14 +9,24 @@
     tools:context="com.example.vocalearn.StartingScreenActivity">
 
     <TextView
+        android:id="@+id/quiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="30dp"
-        android:text="My Awesome Quiz"
+        android:text="QUIZ"
         android:textColor="@android:color/black"
         android:textSize="35sp" />
-
+    <TextView
+        android:id="@+id/txtLevel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/quiz"
+        android:text="Level: "
+        android:textColor="@android:color/black"
+        android:textSize="20dp" />
     <TextView
         android:id="@+id/text_view_highscore"
         android:layout_width="wrap_content"
@@ -25,6 +35,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="32dp"
         android:text="Highscore: 0"
+        android:visibility="invisible"
         android:textSize="20sp" />
 
     <Button
@@ -33,21 +44,5 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:text="Start Quiz" />
-
-    <Spinner
-        android:id="@+id/spinner_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/button_start_quiz"
-        android:layout_below="@+id/button_start_quiz"
-        android:layout_marginTop="16dp" />
-
-    <Spinner
-        android:id="@+id/spinner_difficulty"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/button_start_quiz"
-        android:layout_below="@+id/spinner_category"
-        android:layout_marginTop="16dp" />
 
 </RelativeLayout>

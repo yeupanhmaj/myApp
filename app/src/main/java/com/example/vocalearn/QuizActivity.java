@@ -1,18 +1,21 @@
 package com.example.vocalearn;
 
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.content.Intent;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.speech.tts.TextToSpeech;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vocalearn.Entity.Question;
 import com.example.vocalearn.question.QuizDbHelper;
@@ -22,10 +25,9 @@ import java.util.Collections;
 import java.util.Locale;
 
 public class QuizActivity extends AppCompatActivity {
-
     public static final String EXTRA_SCORE = "extraScore";
     private static final long COUNTDOWN_IN_MILLIS = 30000;
-
+    private static final String KEY_CHUDE = "ChuDe";
     private static final String KEY_SCORE = "keyScore";
     private static final String KEY_QUESTION_COUNT = "keyQuestionCount";
     private static final String KEY_MILLIS_LEFT = "keyMillisLeft";
@@ -35,8 +37,6 @@ public class QuizActivity extends AppCompatActivity {
     private TextView textViewQuestion;
     private TextView textViewScore;
     private TextView textViewQuestionCount;
-    private TextView textViewCategory;
-    private TextView textViewDifficulty;
     private TextView textViewCountDown;
     private RadioGroup rbGroup;
     private RadioButton rb1;
@@ -54,46 +54,36 @@ public class QuizActivity extends AppCompatActivity {
     private int questionCounter;
     private int questionCountTotal;
     private Question currentQuestion;
-
+    private ImageButton btnSpeak;
+    private TextToSpeech mTTS;
     private int score;
     private boolean answered;
-
+    private String speech;
     private long backPressedTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-
+        rbGroup=findViewById(R.id.radio_group);
+        speech = new String();
         textViewQuestion = findViewById(R.id.text_view_question);
         textViewScore = findViewById(R.id.text_view_score);
         textViewQuestionCount = findViewById(R.id.text_view_question_count);
-        textViewCategory = findViewById(R.id.text_view_category);
-        textViewDifficulty = findViewById(R.id.text_view_difficulty);
         textViewCountDown = findViewById(R.id.text_view_countdown);
-        rbGroup = findViewById(R.id.radio_group);
+        btnSpeak = findViewById(R.id.button_speak);
         rb1 = findViewById(R.id.radio_button1);
         rb2 = findViewById(R.id.radio_button2);
         rb3 = findViewById(R.id.radio_button3);
         buttonConfirmNext = findViewById(R.id.button_confirm_next);
-
         textColorDefaultRb = rb1.getTextColors();
         textColorDefaultCd = textViewCountDown.getTextColors();
 
-        Intent intent = getIntent();
-        int categoryID = intent.getIntExtra(StartingScreenActivity.EXTRA_CATEGORY_ID, 0);
-        String categoryName = intent.getStringExtra(StartingScreenActivity.EXTRA_CATEGORY_NAME);
-        String difficulty = intent.getStringExtra(StartingScreenActivity.EXTRA_DIFFICULTY);
-
-        textViewCategory.setText("Category: " + categoryName);
-        textViewDifficulty.setText("Difficulty: " + difficulty);
-
         if (savedInstanceState == null) {
-            QuizDbHelper dbHelper = QuizDbHelper.getInstance(this);
-            questionList = dbHelper.getQuestions(categoryID, difficulty);
+            QuizDbHelper dbHelper = new QuizDbHelper(this);
+            questionList = dbHelper.getAllQuestions(KEY_CHUDE);
             questionCountTotal = questionList.size();
             Collections.shuffle(questionList);
-
             showNextQuestion();
         } else {
             questionList = savedInstanceState.getParcelableArrayList(KEY_QUESTION_LIST);
@@ -111,7 +101,23 @@ public class QuizActivity extends AppCompatActivity {
                 showSolution();
             }
         }
+        mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
+            @Override
+            public void onInit(int status) {
+                if (status == TextToSpeech.SUCCESS) {
+                    int result = mTTS.setLanguage(Locale.ENGLISH);
 
+                    if (result == TextToSpeech.LANG_MISSING_DATA
+                            || result == TextToSpeech.LANG_NOT_SUPPORTED) {
+                        Log.e("TTS", "Language not supported");
+                    } else {
+                        btnSpeak.setEnabled(true);
+                    }
+                } else {
+                    Log.e("TTS", "Initialization failed");
+                }
+            }
+        });
         buttonConfirmNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -126,8 +132,16 @@ public class QuizActivity extends AppCompatActivity {
                 }
             }
         });
+        btnSpeak.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                speak(speech);
+            }
+        });
     }
-
+    private void speak(String text) {
+        mTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
+    }
     private void showNextQuestion() {
         rb1.setTextColor(textColorDefaultRb);
         rb2.setTextColor(textColorDefaultRb);
@@ -141,7 +155,7 @@ public class QuizActivity extends AppCompatActivity {
             rb1.setText(currentQuestion.getOption1());
             rb2.setText(currentQuestion.getOption2());
             rb3.setText(currentQuestion.getOption3());
-
+            speech = currentQuestion.getRightAnswer();
             questionCounter++;
             textViewQuestionCount.setText("Question: " + questionCounter + "/" + questionCountTotal);
             answered = false;
@@ -210,15 +224,15 @@ public class QuizActivity extends AppCompatActivity {
         switch (currentQuestion.getAnswerNr()) {
             case 1:
                 rb1.setTextColor(Color.GREEN);
-                textViewQuestion.setText("Answer 1 is correct");
+                //textViewQuestion.setText("Answer 1 is correct");
                 break;
             case 2:
                 rb2.setTextColor(Color.GREEN);
-                textViewQuestion.setText("Answer 2 is correct");
+                //textViewQuestion.setText("Answer 2 is correct");
                 break;
             case 3:
                 rb3.setTextColor(Color.GREEN);
-                textViewQuestion.setText("Answer 3 is correct");
+                //textViewQuestion.setText("Answer 3 is correct");
                 break;
         }
 

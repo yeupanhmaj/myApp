@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity {
                         swapFragment(selectedFm);
                         break;
                     case R.id.nav_test:
-                        Intent intent = new Intent(MainActivity.this,StartingScreenActivity.class);
+                        Intent intent = new Intent(MainActivity.this, StartingScreenActivity.class);
                         startActivity(intent);
 //                        selectedFm = new Test();
 //                        swapFragment(selectedFm);

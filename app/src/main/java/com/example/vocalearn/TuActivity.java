@@ -14,13 +14,15 @@ import com.example.vocalearn.Entity.Words;
 
 import java.util.Locale;
 
-public class TuAct extends AppCompatActivity {
+public class TuActivity extends AppCompatActivity {
     private TextView txtWord;
     private TextView txtNghia;
     private TextView txtGhiChu;
     private ImageButton imageButton;
     private TextToSpeech mTTS;
-    private String Text2Speech;
+    private TextView txtPhatAm;
+    private final String KEY_WORDS = "Word";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +30,11 @@ public class TuAct extends AppCompatActivity {
         addControl();
         addEvent();
         Intent intent = getIntent();
-        Words words = intent.getParcelableExtra("Word");
+        Words words = intent.getParcelableExtra(KEY_WORDS);
         txtWord.setText(words.getTu());
         txtNghia.setText(words.getNghia());
         txtGhiChu.setText(words.getGhichu());
+        txtPhatAm.setText(words.getPhatAm());
         mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -64,6 +67,7 @@ public class TuAct extends AppCompatActivity {
         txtWord = findViewById(R.id.Tu);
         txtNghia= findViewById(R.id.Nghia);
         txtGhiChu= findViewById(R.id.GhiChu);
+        txtPhatAm= findViewById(R.id.PhatAm);
         imageButton = findViewById(R.id.imageButton);
     }
     private void speak(String text) {
