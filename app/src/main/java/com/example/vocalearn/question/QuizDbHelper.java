@@ -74,6 +74,16 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                                                                                 getTuFromChuDe(ChuDe),
                                                                                 getTuFromChuDe(ChuDe),
                                                                                 answerNr, null);
+            while ( q1.getOption1() == q1.getOption2()||
+                    q1.getOption1() == q1.getOption3()||
+                    q1.getOption3() == q1.getOption2())
+            {
+                Question temp =new Question("Listen and choose the answer",  getTuFromChuDe(ChuDe),
+                        getTuFromChuDe(ChuDe),
+                        getTuFromChuDe(ChuDe),
+                        answerNr, null);
+                q1 = temp;
+            }
             switch (answerNr)
             {
                 case 1 :
@@ -100,5 +110,4 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         dbAccess.closeDB();
         return temp.getTu();
     }
-
 }

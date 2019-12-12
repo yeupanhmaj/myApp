@@ -18,7 +18,7 @@ public class TuActivity extends AppCompatActivity {
     private TextView txtWord;
     private TextView txtNghia;
     private TextView txtGhiChu;
-    private ImageButton imageButton;
+    private ImageButton imageButton,btnFav;
     private TextToSpeech mTTS;
     private TextView txtPhatAm;
     private final String KEY_WORDS = "Word";
@@ -35,6 +35,7 @@ public class TuActivity extends AppCompatActivity {
         txtNghia.setText(words.getNghia());
         txtGhiChu.setText(words.getGhichu());
         txtPhatAm.setText(words.getPhatAm());
+
         mTTS = new TextToSpeech(this, new TextToSpeech.OnInitListener() {
             @Override
             public void onInit(int status) {
@@ -69,6 +70,7 @@ public class TuActivity extends AppCompatActivity {
         txtGhiChu= findViewById(R.id.GhiChu);
         txtPhatAm= findViewById(R.id.PhatAm);
         imageButton = findViewById(R.id.imageButton);
+        btnFav = findViewById(R.id.btnFav);
     }
     private void speak(String text) {
         mTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
