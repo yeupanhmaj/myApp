@@ -56,10 +56,10 @@ public class MainActivity extends AppCompatActivity {
                         swapFragment(selectedFm);
                         break;
                     case R.id.nav_test:
+                        selectedFm = new Test();
+                        swapFragment(selectedFm);
                         Intent intent = new Intent(MainActivity.this, StartingScreenActivity.class);
                         startActivity(intent);
-//                        selectedFm = new Test();
-//                        swapFragment(selectedFm);
                         break;
                     case R.id.nav_search:
                         selectedFm = new Search();

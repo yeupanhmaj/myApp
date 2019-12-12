@@ -75,6 +75,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:freezesText="true"
+        android:background="@drawable/btn_background"
         android:text="Confirm" />
 
     <LinearLayout
@@ -104,8 +105,7 @@
             android:layout_gravity="center_horizontal"
             android:background="@drawable/ic_speech"
             android:enabled="false"
-
-            android:text="Say it!" />
+            />
     </LinearLayout>
 
 </RelativeLayout>

@@ -70,7 +70,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
         for (int i=0;i<5;i++)
         {
             answerNr=r.nextInt(2)+1;
-            Question q1 = new Question("Choose the Right Word",  getTuFromChuDe(ChuDe),
+            Question q1 = new Question("Listen and choose the answer",  getTuFromChuDe(ChuDe),
                                                                                 getTuFromChuDe(ChuDe),
                                                                                 getTuFromChuDe(ChuDe),
                                                                                 answerNr, null);
