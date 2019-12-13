@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.vocalearn.Entity.ChuDe;
+import com.example.vocalearn.R;
 import com.example.vocalearn.SqliteOpenHelper.DatabaseOpenHelper;
 
 import java.util.ArrayList;
@@ -16,7 +17,6 @@ public class ChuDeDAO {
     private SQLiteDatabase db;
     private static ChuDeDAO instance;
     Cursor c = null;
-
     private ChuDeDAO(Context context)
     {
         this.openHelper = new DatabaseOpenHelper(context);

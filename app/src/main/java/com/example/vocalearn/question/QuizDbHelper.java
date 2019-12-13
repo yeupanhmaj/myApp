@@ -74,6 +74,7 @@ public class QuizDbHelper extends SQLiteOpenHelper {
                                                                                 getTuFromChuDe(ChuDe),
                                                                                 getTuFromChuDe(ChuDe),
                                                                                 answerNr, null);
+
             while ( q1.getOption1() == q1.getOption2()||
                     q1.getOption1() == q1.getOption3()||
                     q1.getOption3() == q1.getOption2())

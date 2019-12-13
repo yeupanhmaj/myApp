@@ -1,5 +1,6 @@
 package com.example.vocalearn.Databases;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +13,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WordsDAO {
+    public static final String Tu = "Tu";
+    public static final String PhatAm = "PhatAm";
+    public static final String Nghia = "Nghia";
+    public static final String Ghichu = "Ghichu";
+    public static final String ChuDe = "ChuDe";
+    public static final String Hard = "Hard";
+    public static final String Favorite = "Favorite";
+    public static final String Learned = "Learned";
     private SQLiteOpenHelper openHelper;
     private SQLiteDatabase db;
     private static WordsDAO instance;
@@ -53,7 +62,10 @@ public class WordsDAO {
                 temp.setPhatAm(c.getString(1));
                 temp.setNghia(c.getString(2));
                 temp.setGhichu(c.getString(3));
-                temp.setStatus(c.getString(4));
+                temp.setChude(c.getString(4));
+                temp.setHard(c.getInt(5));
+                temp.setFavorite(c.getInt(6));
+                temp.setLearned(c.getInt(7));
                 questionList.add(temp);
             } while (c.moveToNext());
         }
@@ -74,12 +86,58 @@ public class WordsDAO {
                 temp.setPhatAm(c.getString(1));
                 temp.setNghia(c.getString(2));
                 temp.setGhichu(c.getString(3));
-                temp.setStatus(c.getString(4));
+                temp.setChude(c.getString(4));
+                temp.setHard(c.getInt(5));
+                temp.setFavorite(c.getInt(6));
+                temp.setLearned(c.getInt(7));
                 questionList=(temp);
             } while (c.moveToNext());
         }
 
         c.close();
         return questionList;
+    }
+    public Words getWord(String KEY)
+    {
+        Words questionList = new Words();
+        String query ="SELECT * FROM TuDien WHERE Tu="+"'"+ KEY +"'";
+        db = openHelper.getReadableDatabase();
+        c= db.rawQuery(query,null);
+        if (c.moveToFirst()) {
+            do {
+                Words temp = new Words();
+                temp.setTu(c.getString(0));
+                temp.setPhatAm(c.getString(1));
+                temp.setNghia(c.getString(2));
+                temp.setGhichu(c.getString(3));
+                temp.setChude(c.getString(4));
+                temp.setHard(c.getInt(5));
+                temp.setFavorite(c.getInt(6));
+                temp.setLearned(c.getInt(7));
+                questionList=(temp);
+            } while (c.moveToNext());
+        }
+
+        c.close();
+        return questionList;
+    }
+    public void updateWord(Words words,int Fav)
+    {
+        db = openHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(Tu,words.getTu());
+        cv.put(PhatAm,words.getPhatAm());
+        cv.put(Nghia,words.getNghia());
+        cv.put(Ghichu,words.getGhichu());
+        cv.put(ChuDe,words.getChude());
+        cv.put(Hard,words.getHard());
+        cv.put(Favorite,Fav);
+        cv.put(Learned,words.getLearned());
+        db.update("TuDien",cv,"Tu='"+words.getTu()+"'",null);
+//        String query = "UPDATE TuDien" +
+//                "SET Favorite ="+ Fav +
+//                "WHERE Tu='"+words.getTu()+"';";
+//        db.execSQL(query);
+        db.close();
     }
 }

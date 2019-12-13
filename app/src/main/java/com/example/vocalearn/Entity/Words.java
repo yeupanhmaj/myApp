@@ -17,16 +17,19 @@ public class Words implements Parcelable {
 
     private String Nghia ;
 
-    private String Ghichu ;
+    private String Ghichu ,Chude;
 
-    private String Status ;
+    private int Hard ,Favorite,Learned;
 
-    public Words(String tu, String phatAm, String nghia, String ghichu, String status) {
+    public Words(@NonNull String tu, String phatAm, String nghia, String ghichu, String chude, int hard, int favorite, int learned) {
         Tu = tu;
         PhatAm = phatAm;
         Nghia = nghia;
         Ghichu = ghichu;
-        Status = status;
+        Chude = chude;
+        Hard = hard;
+        Favorite = favorite;
+        Learned = learned;
     }
 
     public Words() {
@@ -37,8 +40,11 @@ public class Words implements Parcelable {
         PhatAm = in.readString();
         Nghia = in.readString();
         Ghichu = in.readString();
-        Status = in.readString();
+        Hard = in.readInt();
+        Favorite = in.readInt();
+        Learned = in.readInt();
     }
+
 
     public static final Creator<Words> CREATOR = new Creator<Words>() {
         @Override
@@ -84,12 +90,36 @@ public class Words implements Parcelable {
         Ghichu = ghichu;
     }
 
-    public String getStatus() {
-        return Status;
+    public int getHard() {
+        return Hard;
     }
 
-    public void setStatus(String status) {
-        Status = status;
+    public void setHard(int hard) {
+        Hard = hard;
+    }
+
+    public int getFavorite() {
+        return Favorite;
+    }
+
+    public void setFavorite(int favorite) {
+        Favorite = favorite;
+    }
+
+    public int getLearned() {
+        return Learned;
+    }
+
+    public void setLearned(int learned) {
+        Learned = learned;
+    }
+
+    public String getChude() {
+        return Chude;
+    }
+
+    public void setChude(String chude) {
+        Chude = chude;
     }
 
     @Override
@@ -98,11 +128,14 @@ public class Words implements Parcelable {
     }
 
     @Override
-    public void writeToParcel(Parcel parcel, int i) {
-        parcel.writeString(Tu);
-        parcel.writeString(PhatAm);
-        parcel.writeString(Nghia);
-        parcel.writeString(Ghichu);
-        parcel.writeString(Status);
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(Tu);
+        dest.writeString(PhatAm);
+        dest.writeString(Nghia);
+        dest.writeString(Ghichu);
+        dest.writeString(Chude);
+        dest.writeInt(Hard);
+        dest.writeInt(Favorite);
+        dest.writeInt(Learned);
     }
 }

@@ -1,8 +1,10 @@
 package com.example.vocalearn.CustomAdapter;
 
+import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -10,12 +12,24 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.vocalearn.Entity.ChuDe;
 import com.example.vocalearn.Entity.Words;
+import com.example.vocalearn.MyApplication;
 import com.example.vocalearn.R;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ChudeAdapter extends RecyclerView.Adapter<ChudeAdapter.WordsHolder> {
+    private static int[] imgs = {   R.drawable.chude_1,
+            R.drawable.chude_2,
+            R.drawable.chude_3,
+            R.drawable.chude_4,
+            R.drawable.chude_5,
+            R.drawable.chude_6,
+            R.drawable.chude_7,
+            R.drawable.chude_8,
+            R.drawable.chude_9,
+            R.drawable.chude_10,
+            R.drawable.chude_11};
     private List<ChuDe> chude = new ArrayList<>();
     private OnChuDeClickListener listener;
     @NonNull
@@ -31,10 +45,11 @@ public class ChudeAdapter extends RecyclerView.Adapter<ChudeAdapter.WordsHolder>
         this.listener = listener;
     }
 
-    @Override
+    @Override//set các view
     public void onBindViewHolder(@NonNull WordsHolder holder, int position) {
         final ChuDe currentWord = chude.get(position);
         holder.txtTenChude.setText(currentWord.getTenChuDe());
+        holder.imgChuDe.setImageDrawable(MyApplication.getContext().getDrawable(imgs[Integer.parseInt(currentWord.getIDChuDe())-1]));
     }
 
     @Override
@@ -49,11 +64,13 @@ public class ChudeAdapter extends RecyclerView.Adapter<ChudeAdapter.WordsHolder>
     class WordsHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
         private TextView txtTenChude;
+        private ImageView imgChuDe;
         OnChuDeClickListener onChuDeClickListener;
 
         public WordsHolder(@NonNull View itemView,OnChuDeClickListener onWordClickListener) {
             super(itemView);
             txtTenChude = itemView.findViewById(R.id.txtTenChuDe);
+            imgChuDe = itemView.findViewById(R.id.imgChuDe);
             this.onChuDeClickListener = onWordClickListener;
             itemView.setOnClickListener(this);
         }
