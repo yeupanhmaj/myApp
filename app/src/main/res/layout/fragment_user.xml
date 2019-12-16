@@ -1,39 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="match_parent"
+        android:id="@+id/imgUser"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:background="@drawable/roundconnor"
-        app:srcCompat="@mipmap/ic_launcher_round" />
+        android:background="@mipmap/ic_launcher"
+        android:layout_alignParentEnd="true"
+    />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="match_parent"
-        android:layout_height="93dp"
+        android:id="@+id/txtUserName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/imgUser"
         android:text="Tên:" />
 
-    <TextView
-        android:id="@+id/textView4"
-        android:layout_width="match_parent"
-        android:layout_height="90dp"
-        android:text="Email:" />
-
-    <TextView
-        android:id="@+id/textView5"
-        android:layout_width="match_parent"
-        android:layout_height="113dp"
-        android:text="Mật Khẩu" />
-
-    <TextView
-        android:id="@+id/textView6"
-        android:layout_width="match_parent"
-        android:layout_height="154dp"
-        android:text="Đăng Xuất" />
-
-</LinearLayout>
+</RelativeLayout>

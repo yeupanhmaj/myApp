@@ -21,7 +21,9 @@ import com.example.vocalearn.fragment.Search;
 import com.example.vocalearn.fragment.Test;
 import com.example.vocalearn.fragment.User;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
+import com.microsoft.appcenter.AppCenter;
+import com.microsoft.appcenter.analytics.Analytics;
+import com.microsoft.appcenter.crashes.Crashes;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -34,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        AppCenter.start(getApplication(), "0bd5324f-031c-40bd-ae0a-1b91d24ffd25",
+                Analytics.class, Crashes.class);
         swapFragment(new Home());
         addControll();
         addEvent();

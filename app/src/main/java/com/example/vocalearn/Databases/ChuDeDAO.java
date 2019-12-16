@@ -58,4 +58,19 @@ public class ChuDeDAO {
         c.close();
         return chudeList;
     }
+    public List<String> getAllNameChuDe()
+    {
+        List<String> chudeList = new ArrayList<>();
+        db = openHelper.getReadableDatabase();
+        c= db.rawQuery("select * from chude",null);
+        if (c.moveToFirst()) {
+            do {
+
+                chudeList.add(c.getString(1));
+            } while (c.moveToNext());
+        }
+
+        c.close();
+        return chudeList;
+    }
 }

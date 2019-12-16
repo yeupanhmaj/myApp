@@ -17,26 +17,26 @@
         android:text="QUIZ"
         android:textColor="@android:color/black"
         android:textSize="35sp" />
-    <TextView
-        android:id="@+id/txtLevel"
+    <Spinner
+        android:id="@+id/spinnerChude"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="50dp"
         android:layout_below="@id/quiz"
-        android:text="Level: "
-        android:textColor="@android:color/black"
-        android:textSize="20dp" />
+        android:layout_centerInParent="true"
+        >
+
+    </Spinner>
     <TextView
         android:id="@+id/text_view_highscore"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_above="@id/button_start_quiz"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="32dp"
-        android:text="Highscore: 0"
-        android:visibility="invisible"
-        android:textSize="20sp" />
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/quiz"
+        android:layout_toStartOf="@id/spinnerChude"
+        android:text="Chọn chủ đề:"
+        android:textSize="15sp" />
 
     <Button
         android:id="@+id/button_start_quiz"
@@ -44,14 +44,14 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true"
         android:background="@drawable/btn_background"
-        android:text="Start Quiz" />
+        android:text="Practice" />
     <Button
-        android:id="@+id/btnMakeTest"
+        android:id="@+id/btnDoTest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/button_start_quiz"
         android:layout_centerInParent="true"
         android:background="@drawable/btn_background"
-        android:text="Make A " />
+        android:text="Do A Test" />
 
 </RelativeLayout>

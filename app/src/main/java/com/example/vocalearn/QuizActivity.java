@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.vocalearn.Entity.ChuDe;
 import com.example.vocalearn.Entity.Question;
 import com.example.vocalearn.question.QuizDbHelper;
 
@@ -58,30 +59,23 @@ public class QuizActivity extends AppCompatActivity {
     private TextToSpeech mTTS;
     private int score;
     private boolean answered;
-    private String speech;
+    private String speech,chude;
     private long backPressedTime;
+
+    private Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-        rbGroup=findViewById(R.id.radio_group);
-        speech = new String();
-        textViewQuestion = findViewById(R.id.text_view_question);
-        textViewScore = findViewById(R.id.text_view_score);
-        textViewQuestionCount = findViewById(R.id.text_view_question_count);
-        textViewCountDown = findViewById(R.id.text_view_countdown);
-        btnSpeak = findViewById(R.id.button_speak);
-        rb1 = findViewById(R.id.radio_button1);
-        rb2 = findViewById(R.id.radio_button2);
-        rb3 = findViewById(R.id.radio_button3);
-        buttonConfirmNext = findViewById(R.id.button_confirm_next);
-        textColorDefaultRb = rb1.getTextColors();
-        textColorDefaultCd = textViewCountDown.getTextColors();
+
+        intent = getIntent();
+        chude = intent.getStringExtra(KEY_CHUDE);
+        addControl();
 
         if (savedInstanceState == null) {
             QuizDbHelper dbHelper = new QuizDbHelper(this);
-            questionList = dbHelper.getAllQuestions(KEY_CHUDE);
+            questionList = dbHelper.getAllQuestions(chude);
             questionCountTotal = questionList.size();
             Collections.shuffle(questionList);
             showNextQuestion();
@@ -139,6 +133,23 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
     }
+
+    private void addControl() {
+        rbGroup=findViewById(R.id.radio_group);
+        speech = new String();
+        textViewQuestion = findViewById(R.id.text_view_question);
+        textViewScore = findViewById(R.id.text_view_score);
+        textViewQuestionCount = findViewById(R.id.text_view_question_count);
+        textViewCountDown = findViewById(R.id.text_view_countdown);
+        btnSpeak = findViewById(R.id.button_speak);
+        rb1 = findViewById(R.id.radio_button1);
+        rb2 = findViewById(R.id.radio_button2);
+        rb3 = findViewById(R.id.radio_button3);
+        buttonConfirmNext = findViewById(R.id.button_confirm_next);
+        textColorDefaultRb = rb1.getTextColors();
+        textColorDefaultCd = textViewCountDown.getTextColors();
+    }
+
     private void speak(String text) {
         mTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }

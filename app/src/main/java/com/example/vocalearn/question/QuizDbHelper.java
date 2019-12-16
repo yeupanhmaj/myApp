@@ -63,11 +63,11 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<Question> getAllQuestions(String ChuDe) {
-        ChuDe ="Học tập";
+        //ChuDe ="Học tập";
         Random r = new Random();
         int answerNr;
         ArrayList<Question> questionList = new ArrayList<>();
-        for (int i=0;i<5;i++)
+        for (int i=0;i<10;i++)
         {
             answerNr=r.nextInt(2)+1;
             Question q1 = new Question("Listen and choose the answer",  getTuFromChuDe(ChuDe),
