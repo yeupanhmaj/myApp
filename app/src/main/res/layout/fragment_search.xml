@@ -5,22 +5,40 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <EditText
-        android:id="@+id/txtSearch"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:ems="10"
-        android:hint="Search"
-        android:background="@drawable/border"
-        android:inputType="textPersonName" />
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <RelativeLayout>
+            <EditText
+                android:id="@+id/txtSearch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:layout_alignParentStart="true"
+                android:layout_toStartOf="@id/btnAddmore"
+                android:imeOptions="actionDone"
+                android:inputType="text"
+                android:hint="Search" />
+
+            <Button
+                android:background="@drawable/btn_background"
+                android:id="@+id/btnAddmore"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="Add more word" />
+        </RelativeLayout>
+
+
+    </TableRow>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rclWords"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:listitem="@layout/words_item"
-        android:focusable="true">
+        android:focusable="true"
+        tools:listitem="@layout/words_item">
 
     </androidx.recyclerview.widget.RecyclerView>
 </LinearLayout>

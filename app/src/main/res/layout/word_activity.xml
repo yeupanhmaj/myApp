@@ -31,13 +31,12 @@
             android:maxLines="1"
             android:text="Tu"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
-            android:textSize="40sp" />
+            android:textSize="40dp" />
         <TextView
             android:id="@+id/PhatAm"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/Tu"
-
             android:ellipsize="end"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:text="phat am"/>
@@ -46,14 +45,15 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/PhatAm"
+            android:layout_marginTop="50dp"
             android:ellipsize="end"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:text="ghi chu"/>
 
         <ImageButton
             android:id="@+id/imageButton"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
             android:layout_below="@id/Nghia"
             android:layout_alignParentEnd="true"
             android:background="@drawable/ic_speech"

@@ -121,6 +121,32 @@ public class WordsDAO {
         c.close();
         return questionList;
     }
+    public List<Words> getAllWordsFromSub(String key)
+    {
+        List<Words> questionList = new ArrayList<>();
+        db = openHelper.getReadableDatabase();
+        String query ="SELECT *\n" +
+                "FROM TuDien\n" +
+                "WHERE tu LIKE '%"+key+"%';";
+        c= db.rawQuery(query,null);
+        if (c.moveToFirst()) {
+            do {
+                Words temp = new Words();
+                temp.setTu(c.getString(0));
+                temp.setPhatAm(c.getString(1));
+                temp.setNghia(c.getString(2));
+                temp.setGhichu(c.getString(3));
+                temp.setChude(c.getString(4));
+                temp.setHard(c.getInt(5));
+                temp.setFavorite(c.getInt(6));
+                temp.setLearned(c.getInt(7));
+                questionList.add(temp);
+            } while (c.moveToNext());
+        }
+
+        c.close();
+        return questionList;
+    }
     public void updateWord(Words words,int Fav)
     {
         db = openHelper.getWritableDatabase();
