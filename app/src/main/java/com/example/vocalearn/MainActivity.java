@@ -24,6 +24,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
@@ -32,6 +33,7 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -43,18 +45,16 @@ public class MainActivity extends AppCompatActivity {
         addEvent();
     }
 
-    private void addControll()
-    {
-        bottomNavigationView= findViewById(R.id.bot_nav);
+    private void addControll() {
+        bottomNavigationView = findViewById(R.id.bot_nav);
     }
-    private void addEvent()
-    {
+
+    private void addEvent() {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
                 Fragment selectedFm = null;
-                switch (menuItem.getItemId())
-                {
+                switch (menuItem.getItemId()) {
                     case R.id.nav_home:
                         selectedFm = new Home();
                         swapFragment(selectedFm);
@@ -62,8 +62,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_test:
                         selectedFm = new Test();
                         swapFragment(selectedFm);
-//                        Intent intent = new Intent(MainActivity.this, StartingScreenActivity.class);
-//                        startActivity(intent);
                         break;
                     case R.id.nav_search:
                         selectedFm = new Search();
@@ -72,13 +70,16 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.nav_user:
                         selectedFm = new User();
                         swapFragment(selectedFm);
+//                        Intent intent = new Intent(MyApplication.getContext(),ScheduleActivity.class);
+//                        startActivity(intent);
                         break;
                 }
                 return true;
             }
         });
     }
-    private void swapFragment(Fragment fragment){
+
+    private void swapFragment(Fragment fragment) {
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragment_main, fragment);
