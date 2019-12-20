@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class WordsDAO {
+    private String TABLE_NAME = "TuDien";
     public static final String Tu = "Tu";
     public static final String PhatAm = "PhatAm";
     public static final String Nghia = "Nghia";
@@ -159,11 +160,22 @@ public class WordsDAO {
         cv.put(Hard,words.getHard());
         cv.put(Favorite,Fav);
         cv.put(Learned,words.getLearned());
-        db.update("TuDien",cv,"Tu='"+words.getTu()+"'",null);
-//        String query = "UPDATE TuDien" +
-//                "SET Favorite ="+ Fav +
-//                "WHERE Tu='"+words.getTu()+"';";
-//        db.execSQL(query);
+        db.update(TABLE_NAME,cv,"Tu='"+words.getTu()+"'",null);
+        db.close();
+    }
+    public void insertWord(Words words)
+    {
+        db = openHelper.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(Tu,words.getTu());
+        cv.put(PhatAm,words.getPhatAm());
+        cv.put(Nghia,words.getNghia());
+        cv.put(Ghichu,words.getGhichu());
+        cv.put(ChuDe,words.getChude());
+        cv.put(Hard,0);
+        cv.put(Favorite,1);
+        cv.put(Learned,0);
+        db.insert(TABLE_NAME,null,cv);
         db.close();
     }
 }

@@ -22,7 +22,7 @@
                 android:hint="Search" />
 
             <Button
-                android:background="@drawable/btn_background"
+                style="@style/Widget.Button"
                 android:id="@+id/btnAddmore"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

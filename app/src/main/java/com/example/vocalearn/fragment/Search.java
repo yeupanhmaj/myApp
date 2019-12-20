@@ -1,5 +1,6 @@
 package com.example.vocalearn.fragment;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
@@ -10,6 +11,7 @@ import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +21,7 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.vocalearn.AddWordActivity;
 import com.example.vocalearn.CustomAdapter.WordsAdapter;
 import com.example.vocalearn.Databases.WordsDAO;
 import com.example.vocalearn.Entity.Words;
@@ -37,7 +40,6 @@ public class Search extends Fragment implements WordsAdapter.OnWordClickListener
     @Nullable
     private EditText txtSearch;
     private List<Words> mylist;
-
     private WordsAdapter wordsAdapter;
 
     @Override
@@ -58,14 +60,32 @@ public class Search extends Fragment implements WordsAdapter.OnWordClickListener
                     getItemByKey(txtSearch.getText().toString());
                     wordsAdapter.setWords(mylist);
                     recyclerView.setAdapter(wordsAdapter);
-                    Toast toast = Toast.makeText(MyApplication.getContext(), txtSearch.getText().toString(), Toast.LENGTH_LONG);
-                    toast.setGravity(Gravity.TOP | Gravity.CENTER, 0, 0);
-                    toast.show();
                 }
                 return false;
             }
         });
+        btnAddmore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), AddWordActivity.class);
+                startActivityForResult(intent, 1);
+            }
+        });
     }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        if (requestCode == 1) {
+            if (resultCode == Activity.RESULT_OK) {
+                wordsAdapter.setWords(mylist);
+                recyclerView.setAdapter(wordsAdapter);
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
+    }//onActivityResult
 
     private void getItemByKey(String key) {
         List<Words> temp;

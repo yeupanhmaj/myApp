@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginStart="8dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp"
+    android:layout_marginBottom="8dp">
+
+    <RelativeLayout
+        android:id="@+id/item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp">
+
+        <EditText
+            android:id="@+id/txtEditTu"
+            android:layout_width="match_parent"
+            android:hint="English"
+            android:layout_height="wrap_content">
+
+        </EditText>
+
+        <EditText
+            android:layout_below="@id/txtEditTu"
+            android:id="@+id/txtEditNghia"
+            android:layout_width="match_parent"
+            android:hint="Vietnamese"
+            android:layout_height="wrap_content">
+
+        </EditText>
+        <RadioGroup
+            android:id="@+id/rbGroup"
+            android:layout_below="@id/txtEditNghia"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </RadioGroup>
+        <EditText
+            android:id="@+id/txtEditNote"
+            android:layout_below="@id/rbGroup"
+            android:layout_width="match_parent"
+            android:hint="Note"
+            android:layout_height="wrap_content"
+            android:maxLines="13"/>
+        <LinearLayout
+            android:id="@+id/foot"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btnSave"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="save" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="fill_parent"
+                android:layout_weight="1">
+
+                <Button
+                    android:id="@+id/btnCancel"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Cancel" />
+            </LinearLayout>
+
+
+        </LinearLayout>
+
+    </RelativeLayout>
+</androidx.cardview.widget.CardView>

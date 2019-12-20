@@ -37,21 +37,22 @@
             <TextView
                 android:id="@id/textView2"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="50dp"
                 android:layout_alignParentStart="true"
                 android:text="Name: "
                 android:textSize="25dp" />
 
-            <TextView
+            <EditText
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="45dp"
                 android:layout_toStartOf="@id/btnEditTen"
                 android:layout_toEndOf="@id/textView2"
                 android:hint="You Name Here"
+                android:enabled="false"
                 android:singleLine="true"
                 android:textSize="25dp">
 
-            </TextView>
+            </EditText>
 
             <ImageButton
                 android:id="@+id/btnEditTen"
@@ -106,12 +107,11 @@
         <RelativeLayout
             android:id="@+id/txtTime"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/textbutton_background"
             android:clickable="true"
-            android:focusable="true"
-            >
+            android:focusable="true">
 
             <TextView
                 android:id="@+id/line1"
@@ -130,11 +130,10 @@
         <RelativeLayout
             android:id="@+id/txtDay"
             android:layout_width="match_parent"
-            android:layout_height="60dp"
+            android:layout_height="70dp"
             android:background="@drawable/textbutton_background"
             android:clickable="true"
-            android:focusable="true"
-            >
+            android:focusable="true">
 
             <TextView
                 android:id="@id/line2"
@@ -154,17 +153,35 @@
         <RelativeLayout
             android:id="@+id/txtNotification"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="65dp"
             android:background="@drawable/textbutton_background"
             android:clickable="true"
-            android:focusable="true"
-            >
+            android:focusable="true">
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:layout_alignParentStart="true"
                 android:text="Time"
                 android:textSize="25dp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:text="notification at"
+                android:textColor="#ac095b"
+                android:singleLine="true"
+                android:textSize="18dp"/>
+            <TextView
+                android:id="@+id/txtTimePractice"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentBottom="true"
+                android:text="time"
+                android:textColor="#ff0000"
+                android:singleLine="true"
+                android:textSize="25dp"/>
         </RelativeLayout>
 
     </LinearLayout>
@@ -172,11 +189,14 @@
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
+
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
+            style="@style/Widget.Button"
             android:text="Reset Setting"></Button>
+
     </RelativeLayout>
 
 </LinearLayout>
