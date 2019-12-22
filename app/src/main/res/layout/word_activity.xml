@@ -90,7 +90,7 @@
                     android:id="@+id/btnRemove"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Add To Learned" />
+                    android:text="Remove From Library" />
             </LinearLayout>
 
 

@@ -1,8 +1,11 @@
 package com.example.vocalearn;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.Activity;
 import android.content.ContentValues;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +15,7 @@ import android.speech.tts.TextToSpeech;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.QuickContactBadge;
 import android.widget.TextView;
@@ -32,7 +36,7 @@ public class TuActivity extends AppCompatActivity {
     private ImageButton imageButton,imgbtnFav;
     private TextToSpeech mTTS;
     private TextView txtPhatAm;
-    private Button btnFav,btnLearned;
+    private Button btnFav,btnRemove;
     private Words words;
     private Intent intent;
 
@@ -106,10 +110,32 @@ public class TuActivity extends AppCompatActivity {
                 }
             }
         });
-        btnLearned.setOnClickListener(new View.OnClickListener() {
+        btnRemove.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AlertDialog.Builder alert = new AlertDialog.Builder(TuActivity.this);
+                final EditText edittext = new EditText(TuActivity.this);
+                alert.setTitle("Warning");
+                alert.setMessage("Delete this word from library ?");
 
+                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        //What ever you want to do with the value
+                        deteleWord(words.getTu());
+                        Intent returnIntent = new Intent();
+                        returnIntent.putExtra("result",2);
+                        setResult(Activity.RESULT_OK,returnIntent);
+                        finish();
+                    }
+                });
+
+                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int whichButton) {
+                        // what ever you want to do with No option.
+
+                    }
+                });
+                alert.show();
             }
         });
     }
@@ -122,7 +148,7 @@ public class TuActivity extends AppCompatActivity {
         imageButton = findViewById(R.id.imageButton);
         imgbtnFav = findViewById(R.id.imgbtnFav);
         btnFav = findViewById(R.id.btnAdd);
-        btnLearned = findViewById(R.id.btnRemove);
+        btnRemove = findViewById(R.id.btnRemove);
     }
     private void speak(String text) {
         mTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
@@ -151,6 +177,13 @@ public class TuActivity extends AppCompatActivity {
         dbAccess = dbAccess.getInstance(MyApplication.getContext());
         dbAccess.openDB();
         dbAccess.updateWord(w,Key);
+        dbAccess.closeDB();
+    }
+    private void deteleWord(String Key)
+    {
+        dbAccess = dbAccess.getInstance(MyApplication.getContext());
+        dbAccess.openDB();
+        dbAccess.deleteAt(Key);
         dbAccess.closeDB();
     }
 }

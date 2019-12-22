@@ -85,6 +85,16 @@ public class Search extends Fragment implements WordsAdapter.OnWordClickListener
                 //Write your code if there's no result
             }
         }
+        if (requestCode == 2) {
+            if (resultCode == Activity.RESULT_OK) {
+                getData();
+                wordsAdapter.setWords(mylist);
+                recyclerView.setAdapter(wordsAdapter);
+            }
+            if (resultCode == Activity.RESULT_CANCELED) {
+                //Write your code if there's no result
+            }
+        }
     }//onActivityResult
 
     private void getItemByKey(String key) {
@@ -122,6 +132,6 @@ public class Search extends Fragment implements WordsAdapter.OnWordClickListener
     public void onItemClick(int position) {
         Intent intent = new Intent(getActivity(), TuActivity.class);
         intent.putExtra("Word", mylist.get(position));
-        startActivity(intent);
+        startActivityForResult(intent, 2);
     }
 }

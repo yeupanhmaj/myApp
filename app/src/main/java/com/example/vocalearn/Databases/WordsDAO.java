@@ -178,4 +178,9 @@ public class WordsDAO {
         db.insert(TABLE_NAME,null,cv);
         db.close();
     }
+    public void deleteAt(String key)
+    {
+        db = openHelper.getWritableDatabase();
+        db.delete(TABLE_NAME,"Tu='"+key+"'",null);
+    }
 }

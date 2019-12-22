@@ -166,24 +166,24 @@ public class User extends Fragment {
             public void onClick(View v) {
                 AlertDialog.Builder alert = new AlertDialog.Builder(getActivity());
                 final EditText edittext = new EditText(getActivity());
-                alert.setMessage("Enter Your Message");
-                alert.setTitle("Enter Your Title");
+                alert.setMessage("Enter Your Name");
+                alert.setTitle("Name");
 
                 alert.setView(edittext);
 
-                alert.setPositiveButton("Yes Option", new DialogInterface.OnClickListener() {
+                alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //What ever you want to do with the value
 
                     }
                 });
 
-                alert.setNegativeButton("No Option", new DialogInterface.OnClickListener() {
+                alert.setNegativeButton("No", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         // what ever you want to do with No option.
+
                     }
                 });
-
                 alert.show();
             }
         });
