@@ -30,6 +30,13 @@ public class MyRF {
 
     public static String LoadString(SharedPreferences sp,String key) {
         sp = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext());
-        return sp.getString(key, "");
+        return sp.getString(key, "Enter your name here");
+    }
+    public static void clear(SharedPreferences sp)
+    {
+        sp = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext());// here you get your prefrences by either of two methods
+        SharedPreferences.Editor editor = sp.edit();
+        editor.clear();
+        editor.commit();
     }
 }

@@ -19,6 +19,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.vocalearn.Entity.ChuDe;
 import com.example.vocalearn.Entity.Question;
+import com.example.vocalearn.fragment.Test;
 import com.example.vocalearn.question.QuizDbHelper;
 
 import java.util.ArrayList;
@@ -29,11 +30,13 @@ public class QuizActivity extends AppCompatActivity {
     public static final String EXTRA_SCORE = "extraScore";
     private static final long COUNTDOWN_IN_MILLIS = 30000;
     private static final String KEY_CHUDE = "ChuDe";
+    private static final String KEY_FAV = "fav";
     private static final String KEY_SCORE = "keyScore";
     private static final String KEY_QUESTION_COUNT = "keyQuestionCount";
     private static final String KEY_MILLIS_LEFT = "keyMillisLeft";
     private static final String KEY_ANSWERED = "keyAnswered";
     private static final String KEY_QUESTION_LIST = "keyQuestionList";
+    private static final String PRACTICE_MODE = "mode";
 
     private TextView textViewQuestion;
     private TextView textViewScore;
@@ -59,26 +62,55 @@ public class QuizActivity extends AppCompatActivity {
     private TextToSpeech mTTS;
     private int score;
     private boolean answered;
-    private String speech,chude;
+    private String speech, chude;
     private long backPressedTime;
-
+    private int Fav;
     private Intent intent;
+    private int mode;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
-
+        addControl();
         intent = getIntent();
         chude = intent.getStringExtra(KEY_CHUDE);
-        addControl();
+        mode = intent.getIntExtra(PRACTICE_MODE, 0);
+        Fav = intent.getIntExtra(KEY_FAV, 0);
+
 
         if (savedInstanceState == null) {
-            QuizDbHelper dbHelper = new QuizDbHelper(this);
-            questionList = dbHelper.getAllQuestions(chude);
-            questionCountTotal = questionList.size();
-            Collections.shuffle(questionList);
-            showNextQuestion();
+            if (mode == 0) {
+                if (Fav != 0) {
+                    QuizDbHelper dbHelper = new QuizDbHelper(this);
+                    questionList = dbHelper.getAllQuestions(chude, Fav);
+                    questionCountTotal = questionList.size();
+                    Collections.shuffle(questionList);
+                    showNextQuestion();
+                } else {
+                    QuizDbHelper dbHelper = new QuizDbHelper(this);
+                    questionList = dbHelper.getAllQuestions(chude);
+                    questionCountTotal = questionList.size();
+                    Collections.shuffle(questionList);
+                    showNextQuestion();
+                }
+            } else if (mode == 1) {
+                btnSpeak.setVisibility(View.INVISIBLE);
+                QuizDbHelper dbHelper = new QuizDbHelper(this);
+                questionList = dbHelper.getAllQuestionsByMean(chude, Fav);
+                questionCountTotal = questionList.size();
+                Collections.shuffle(questionList);
+                showNextQuestion();
+            }else if (mode == 2) {
+                btnSpeak.setVisibility(View.INVISIBLE);
+                QuizDbHelper dbHelper = new QuizDbHelper(this);
+                questionList = dbHelper.getAllQuestionsByWord(chude, Fav);
+                questionCountTotal = questionList.size();
+                Collections.shuffle(questionList);
+                showNextQuestion();
+            }
+
+
         } else {
             questionList = savedInstanceState.getParcelableArrayList(KEY_QUESTION_LIST);
             questionCountTotal = questionList.size();
@@ -135,7 +167,7 @@ public class QuizActivity extends AppCompatActivity {
     }
 
     private void addControl() {
-        rbGroup=findViewById(R.id.radio_group);
+        rbGroup = findViewById(R.id.radio_group);
         speech = new String();
         textViewQuestion = findViewById(R.id.text_view_question);
         textViewScore = findViewById(R.id.text_view_score);
@@ -153,6 +185,7 @@ public class QuizActivity extends AppCompatActivity {
     private void speak(String text) {
         mTTS.speak(text, TextToSpeech.QUEUE_FLUSH, null);
     }
+
     private void showNextQuestion() {
         rb1.setTextColor(textColorDefaultRb);
         rb2.setTextColor(textColorDefaultRb);

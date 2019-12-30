@@ -5,6 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/chonburi"
+        android:text="Pick One To Quick Practice"
+        android:textSize="35dp" />
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rclChuDe"
         android:layout_width="match_parent"

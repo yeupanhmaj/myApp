@@ -13,7 +13,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="115dp"
+        android:layout_marginTop="90dp"
         android:text="Practice"
         android:textColor="@android:color/black"
         android:textSize="35sp" />
@@ -38,6 +38,16 @@
         >
 
     </Spinner>
+    <RadioButton
+        android:id="@+id/rdbFav"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/spinnerChude"
+        android:text="Pick From Favorite"
+        android:layout_centerHorizontal="true"
+        >
+
+    </RadioButton>
     <TextView
         android:id="@+id/text_view_highscore"
         android:layout_width="wrap_content"
@@ -45,7 +55,7 @@
         android:layout_marginTop="50dp"
         android:layout_below="@id/line2"
         android:layout_toStartOf="@id/spinnerChude"
-        android:text="Chọn chủ đề:"
+        android:text="Pick A Topic:"
         android:textSize="15sp" />
 
     <Button
@@ -61,9 +71,39 @@
         android:paddingLeft="36dp"
         android:paddingRight="36dp"
         android:paddingTop="16dp"
-        android:text="@string/practice_text"
+        android:text="Practice Listen Skill"
         android:textSize="18sp"
         />
-
-
+    <Button
+        android:id="@+id/btnWordToMean"
+        style="@style/Widget.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/practice_text"
+        android:layout_below="@id/button_start_quiz"
+        android:layout_centerInParent="true"
+        android:paddingBottom="16dp"
+        android:paddingLeft="36dp"
+        android:paddingRight="36dp"
+        android:paddingTop="16dp"
+        android:text="Word To Mean"
+        android:textSize="18sp"
+        />
+    <Button
+        android:id="@+id/btnMeanToWord"
+        style="@style/Widget.Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:contentDescription="@string/practice_text"
+        android:layout_below="@id/btnWordToMean"
+        android:layout_centerInParent="true"
+        android:paddingBottom="16dp"
+        android:paddingLeft="36dp"
+        android:paddingRight="36dp"
+        android:paddingTop="16dp"
+        android:text="Mean To Word"
+        android:textSize="18sp"
+        />
 </RelativeLayout>

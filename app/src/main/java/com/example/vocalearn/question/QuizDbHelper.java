@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.vocalearn.Databases.WordsDAO;
+import com.example.vocalearn.Entity.Option;
 import com.example.vocalearn.Entity.Question;
 import com.example.vocalearn.Entity.Words;
 import com.example.vocalearn.MyApplication;
@@ -63,52 +64,188 @@ public class QuizDbHelper extends SQLiteOpenHelper {
     }
 
     public ArrayList<Question> getAllQuestions(String ChuDe) {
-        //ChuDe ="Học tập";
         Random r = new Random();
         int answerNr;
         ArrayList<Question> questionList = new ArrayList<>();
-        for (int i=0;i<10;i++)
-        {
-            answerNr=r.nextInt(2)+1;
-            Question q1 = new Question("Listen and choose the answer",  getTuFromChuDe(ChuDe),
-                                                                                getTuFromChuDe(ChuDe),
-                                                                                getTuFromChuDe(ChuDe),
-                                                                                answerNr, null);
-
-            while ( q1.getOption1() == q1.getOption2()||
-                    q1.getOption1() == q1.getOption3()||
-                    q1.getOption3() == q1.getOption2())
-            {
-                Question temp =new Question("Listen and choose the answer",  getTuFromChuDe(ChuDe),
+        for (int i = 0; i < 10; i++) {
+            answerNr = (r.nextInt(3) + 1);
+            Question q1 = new Question("Listen and choose the answer", getTuFromChuDe(ChuDe),
+                    getTuFromChuDe(ChuDe),
+                    getTuFromChuDe(ChuDe),
+                    answerNr, null);
+            while (q1.getOption1().equals(q1.getOption2()) ||
+                    q1.getOption2().equals(q1.getOption3()) ||
+                    q1.getOption1().equals(q1.getOption3())) {
+                Question temp = new Question("Listen and choose the answer", getTuFromChuDe(ChuDe),
                         getTuFromChuDe(ChuDe),
                         getTuFromChuDe(ChuDe),
                         answerNr, null);
                 q1 = temp;
             }
-            switch (answerNr)
-            {
-                case 1 :
+            switch (answerNr) {
+                case 1:
                     q1.setRightAnswer(q1.getOption1());
                     break;
-                case 2 :
+                case 2:
                     q1.setRightAnswer(q1.getOption2());
                     break;
-                case 3 :
+                case 3:
                     q1.setRightAnswer(q1.getOption3());
                     break;
             }
-
             questionList.add(q1);
         }
         return questionList;
     }
-    private String getTuFromChuDe(String ChuDe)
+
+    public ArrayList<Question> getAllQuestions(String ChuDe, int FAV) {
+        Random r = new Random();
+        int answerNr;
+        ArrayList<Question> questionList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            answerNr = (r.nextInt(3) + 1);
+            Question q1 = new Question("Listen and choose the answer", getTuFromChuDe(ChuDe, FAV),
+                    getTuFromChuDe(ChuDe, FAV),
+                    getTuFromChuDe(ChuDe, FAV),
+                    answerNr, null);
+            if (q1.getOption1() != null) {
+                while (q1.getOption1().equals(q1.getOption2()) ||
+                        q1.getOption2().equals(q1.getOption3()) ||
+                        q1.getOption1().equals(q1.getOption3())) {
+                    Question temp = new Question("Listen and choose the answer", getTuFromChuDe(ChuDe, FAV),
+                            getTuFromChuDe(ChuDe, FAV),
+                            getTuFromChuDe(ChuDe, FAV),
+                            answerNr, null);
+                    q1 = temp;
+                }
+            }
+            switch (answerNr) {
+                case 1:
+                    q1.setRightAnswer(q1.getOption1());
+                    break;
+                case 2:
+                    q1.setRightAnswer(q1.getOption2());
+                    break;
+                case 3:
+                    q1.setRightAnswer(q1.getOption3());
+                    break;
+            }
+            questionList.add(q1);
+        }
+        return questionList;
+    }
+    //cho nghĩa chọn từ
+    public ArrayList<Question> getAllQuestionsByMean(String ChuDe, int f)
     {
+        Random r = new Random();
+        int answerNr;
+        ArrayList<Question> questionList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            answerNr = (r.nextInt(3) + 1);
+            String questionName = "Chose the correct word of:";
+            Option opt1, opt2, opt3 = new Option();
+            opt1 = getOption(ChuDe,f);
+            opt2 = getOption(ChuDe,f);
+            opt3 = getOption(ChuDe,f);
+            while (opt1.getWord().equals(opt2.getWord()) ||
+                    opt1.getWord().equals(opt3.getWord()) ||
+                    opt2.getWord().equals(opt3.getWord()))
+            {
+                opt1 = getOption(ChuDe,f);
+                opt2 = getOption(ChuDe,f);
+                opt3 = getOption(ChuDe,f);
+            }
+            Question q = new Question(questionName,
+                    opt1.getWord(),
+                    opt2.getWord(),
+                    opt3.getWord(),
+                    answerNr,null);
+            switch (answerNr) {
+                case 1:
+                    q.setRightAnswer(q.getOption1());
+                    q.setQuestion(q.getQuestion()+" "+opt1.getMean());
+                    break;
+                case 2:
+                    q.setRightAnswer(q.getOption2());
+                    q.setQuestion(q.getQuestion()+" "+opt2.getMean());
+                    break;
+                case 3:
+                    q.setRightAnswer(q.getOption3());
+                    q.setQuestion(q.getQuestion()+" "+opt3.getMean());
+                    break;
+            }
+            questionList.add(q);
+        }
+        return questionList;
+    }
+    //cho  chọn từ nghĩa
+    public ArrayList<Question> getAllQuestionsByWord(String ChuDe, int f)
+    {
+        Random r = new Random();
+        int answerNr;
+        ArrayList<Question> questionList = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            answerNr = (r.nextInt(3) + 1);
+            String questionName = "Chose the correct word of:";
+            Option opt1, opt2, opt3 = new Option();
+            opt1 = getOption(ChuDe,f);
+            opt2 = getOption(ChuDe,f);
+            opt3 = getOption(ChuDe,f);
+            while (opt1.getWord().equals(opt2.getWord()) ||
+                    opt1.getWord().equals(opt3.getWord()) ||
+                    opt2.getWord().equals(opt3.getWord()))
+            {
+                opt1 = getOption(ChuDe,f);
+                opt2 = getOption(ChuDe,f);
+                opt3 = getOption(ChuDe,f);
+            }
+            Question q = new Question(questionName,
+                    opt1.getMean(),
+                    opt2.getMean(),
+                    opt3.getMean(),
+                    answerNr,null);
+            switch (answerNr) {
+                case 1:
+                    q.setRightAnswer(q.getOption1());
+                    q.setQuestion(q.getQuestion()+" "+opt1.getWord());
+                    break;
+                case 2:
+                    q.setRightAnswer(q.getOption2());
+                    q.setQuestion(q.getQuestion()+" "+opt2.getWord());
+                    break;
+                case 3:
+                    q.setRightAnswer(q.getOption3());
+                    q.setQuestion(q.getQuestion()+" "+opt3.getWord());
+                    break;
+            }
+            questionList.add(q);
+        }
+        return questionList;
+    }
+    private String getTuFromChuDe(String ChuDe, int f) {
+        Words temp;
+        dbAccess = dbAccess.getInstance(MyApplication.getContext());
+        dbAccess.openDB();
+        temp = dbAccess.getRandom(ChuDe, f);
+        dbAccess.closeDB();
+        return temp.getTu();
+    }
+
+    private String getTuFromChuDe(String ChuDe) {
         Words temp;
         dbAccess = dbAccess.getInstance(MyApplication.getContext());
         dbAccess.openDB();
         temp = dbAccess.getRandom(ChuDe);
         dbAccess.closeDB();
         return temp.getTu();
+    }
+
+    private Option getOption(String ChuDe,int fav) {
+        Option temp;
+        dbAccess = dbAccess.getInstance(MyApplication.getContext());
+        dbAccess.openDB();
+        temp = dbAccess.getOption(ChuDe,fav);
+        dbAccess.closeDB();
+        return temp;
     }
 }

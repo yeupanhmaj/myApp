@@ -1,11 +1,25 @@
 package com.example.vocalearn.fragment;
 
 import android.app.Activity;
+import android.app.AlarmManager;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
+import android.app.TaskStackBuilder;
 import android.app.TimePickerDialog;
+import android.content.BroadcastReceiver;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.IntentFilter;
 import android.content.SharedPreferences;
+import android.content.pm.PackageManager;
+import android.media.RingtoneManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,18 +38,27 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.app.NotificationCompat;
+import androidx.core.os.ConfigurationCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceManager;
 
+import com.example.vocalearn.MainActivity;
 import com.example.vocalearn.MyApplication;
 import com.example.vocalearn.R;
 import com.example.vocalearn.SharedReference.MyRF;
 
+import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 import java.util.zip.Inflater;
+
+import static android.content.Context.ALARM_SERVICE;
 
 public class User extends Fragment {
     private final String listDay[] = {"Monday",
@@ -64,6 +87,7 @@ public class User extends Fragment {
             false, // Wednesday
             false // Thursday
     };
+    String TAG = "AlarmReceiver";
     public static final String SHARED_PREFS = "sharedPrefs";
     private final String NAME = "name";
     private final String HOUR = "hour";
@@ -73,7 +97,8 @@ public class User extends Fragment {
     private int Hour, Minute;
     private SharedPreferences sp;
     private ImageButton btnEditTen;
-
+    private EditText name;
+    private Button btnClearRef;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -82,6 +107,7 @@ public class User extends Fragment {
         Minute = MyRF.LoadInt(sp, MINUTE);
         addControl(root);
         txtTimePractice.setText(Hour + ":" + Minute);
+        name.setText(MyRF.LoadString(sp,NAME));
         addEvent(root);
         return root;
     }
@@ -174,7 +200,8 @@ public class User extends Fragment {
                 alert.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int whichButton) {
                         //What ever you want to do with the value
-
+                        name.setText(edittext.getText().toString());
+                        MyRF.SaveString(sp,NAME,edittext.getText().toString());
                     }
                 });
 
@@ -187,14 +214,42 @@ public class User extends Fragment {
                 alert.show();
             }
         });
+        btnClearRef.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MyRF.clear(sp);
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                ft.detach(User.this).attach(User.this).commit();
+                name.setText("Enter your name here");
+            }
+        });
     }
+    public String getFormatedTime(int h, int m) {
+        final String OLD_FORMAT = "HH:mm";
+        final String NEW_FORMAT = "hh:mm a";
 
+        String oldDateString = h + ":" + m;
+        String newDateString = "";
+        Locale current = ConfigurationCompat.getLocales(getResources().getConfiguration()).get(0);
+        try {
+            SimpleDateFormat sdf = new SimpleDateFormat(OLD_FORMAT, current);
+            Date d = sdf.parse(oldDateString);
+            sdf.applyPattern(NEW_FORMAT);
+            newDateString = sdf.format(d);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return newDateString;
+    }
     private void addControl(View view) {
         txtDay = view.findViewById(R.id.txtDay);
         txtTime = view.findViewById(R.id.txtTime);
         txtNotification = view.findViewById(R.id.txtNotification);
         txtTimePractice = view.findViewById(R.id.txtTimePractice);
         btnEditTen = view.findViewById(R.id.btnEditTen);
+        name = view.findViewById(R.id.Name);
+        btnClearRef = view.findViewById(R.id.btnClearRef);
     }
 
 }

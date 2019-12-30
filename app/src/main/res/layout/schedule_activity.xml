@@ -6,14 +6,13 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageButton
-        android:id="@+id/btnAvatar"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_gravity="center_horizontal"
-        android:background="@drawable/ic_avatar">
-
-    </ImageButton>
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/chonburi"
+        android:text="Setting up your schedule to practice"
+        android:textSize="35dp" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -43,12 +42,14 @@
                 android:textSize="25dp" />
 
             <EditText
+                android:id="@+id/Name"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
                 android:layout_toStartOf="@id/btnEditTen"
                 android:layout_toEndOf="@id/textView2"
-                android:hint="You Name Here"
+                android:hint="What Your Name?"
                 android:enabled="false"
+                android:textColor="#ac095b"
                 android:singleLine="true"
                 android:textSize="25dp">
 
@@ -109,7 +110,7 @@
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:layout_marginTop="10dp"
-            android:background="@drawable/textbutton_background"
+
             android:clickable="true"
             android:focusable="true">
 
@@ -131,7 +132,6 @@
             android:id="@+id/txtDay"
             android:layout_width="match_parent"
             android:layout_height="70dp"
-            android:background="@drawable/textbutton_background"
             android:clickable="true"
             android:focusable="true">
 
@@ -154,7 +154,7 @@
             android:id="@+id/txtNotification"
             android:layout_width="wrap_content"
             android:layout_height="65dp"
-            android:background="@drawable/textbutton_background"
+
             android:clickable="true"
             android:focusable="true">
 
@@ -168,7 +168,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"
-                android:text="notification at"
+                android:layout_marginEnd="10dp"
+                android:text="notification at:"
                 android:textColor="#ac095b"
                 android:singleLine="true"
                 android:textSize="18dp"/>
@@ -191,11 +192,12 @@
         android:layout_height="wrap_content">
 
         <Button
+            android:id="@+id/btnClearRef"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
             style="@style/Widget.Button"
-            android:text="Reset Setting"></Button>
+            android:text="Reset Setting" />
 
     </RelativeLayout>
 

@@ -29,7 +29,26 @@ public class ChudeAdapter extends RecyclerView.Adapter<ChudeAdapter.WordsHolder>
             R.drawable.chude_8,
             R.drawable.chude_9,
             R.drawable.chude_10,
-            R.drawable.chude_11};
+            R.drawable.chude_11,
+            R.drawable.chude_12,
+            R.drawable.chude_13,
+            R.drawable.chude_14,
+            R.drawable.chude_15};
+    private static String category[] ={"Eating",
+            "Vehicle",
+            "Animal",
+            "Geography",
+            "Family",
+            "Traffic",
+            "Act",
+            "Color",
+            "House",
+            "Fruit",
+            "Education",
+            "Human",
+            "Character",
+            "Health",
+            "Love"};
     private List<ChuDe> chude = new ArrayList<>();
     private OnChuDeClickListener listener;
     @NonNull
@@ -48,7 +67,8 @@ public class ChudeAdapter extends RecyclerView.Adapter<ChudeAdapter.WordsHolder>
     @Override//set các view
     public void onBindViewHolder(@NonNull WordsHolder holder, int position) {
         final ChuDe currentWord = chude.get(position);
-        holder.txtTenChude.setText(currentWord.getTenChuDe());
+        holder.textTenChuDe.setText(currentWord.getTenChuDe());
+        holder.txtTenChude.setText(category[Integer.parseInt(currentWord.getIDChuDe())-1]);
         holder.imgChuDe.setImageDrawable(MyApplication.getContext().getDrawable(imgs[Integer.parseInt(currentWord.getIDChuDe())-1]));
     }
 
@@ -63,7 +83,7 @@ public class ChudeAdapter extends RecyclerView.Adapter<ChudeAdapter.WordsHolder>
     }
     class WordsHolder extends RecyclerView.ViewHolder implements View.OnClickListener
     {
-        private TextView txtTenChude;
+        private TextView txtTenChude,textTenChuDe;
         private ImageView imgChuDe;
         OnChuDeClickListener onChuDeClickListener;
 
@@ -71,6 +91,7 @@ public class ChudeAdapter extends RecyclerView.Adapter<ChudeAdapter.WordsHolder>
             super(itemView);
             txtTenChude = itemView.findViewById(R.id.txtTenChuDe);
             imgChuDe = itemView.findViewById(R.id.imgChuDe);
+            textTenChuDe = itemView.findViewById(R.id.textTenChuDe);
             this.onChuDeClickListener = onWordClickListener;
             itemView.setOnClickListener(this);
         }

@@ -19,14 +19,19 @@ import com.example.vocalearn.Databases.ChuDeDAO;
 import com.example.vocalearn.Databases.WordsDAO;
 import com.example.vocalearn.Entity.ChuDe;
 import com.example.vocalearn.Entity.Words;
+import com.example.vocalearn.QuizActivity;
 import com.example.vocalearn.R;
 import com.example.vocalearn.TuActivity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 public class Home extends Fragment implements ChudeAdapter.OnChuDeClickListener{
     private RecyclerView recyclerView;
+    private static final int REQUEST_CODE_QUIZ = 1;
+    private static final String PRACTICE_MODE = "mode";
+    private String chude;
     private ChuDeDAO dbAccess;
     @Nullable
     private List<ChuDe> mylist;
@@ -55,6 +60,11 @@ public class Home extends Fragment implements ChudeAdapter.OnChuDeClickListener{
     }
 
     public void onItemClick(int position) {
-
+        Random r = new Random();
+        chude=mylist.get(position).getTenChuDe();
+        Intent intent = new Intent(getActivity(), QuizActivity.class);
+        intent.putExtra("ChuDe",chude);
+        intent.putExtra(PRACTICE_MODE, r.nextInt(3)+1);
+        startActivityForResult(intent, REQUEST_CODE_QUIZ);
     }
 }

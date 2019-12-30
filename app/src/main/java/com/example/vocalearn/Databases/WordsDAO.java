@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.example.vocalearn.Entity.Option;
 import com.example.vocalearn.Entity.Words;
 import com.example.vocalearn.SqliteOpenHelper.DatabaseOpenHelper;
 
@@ -70,7 +71,6 @@ public class WordsDAO {
                 questionList.add(temp);
             } while (c.moveToNext());
         }
-
         c.close();
         return questionList;
     }
@@ -94,7 +94,29 @@ public class WordsDAO {
                 questionList=(temp);
             } while (c.moveToNext());
         }
-
+        c.close();
+        return questionList;
+    }
+    public Words getRandom(String ChuDe,int fav)
+    {
+        Words questionList = new Words();
+        String query ="SELECT * FROM TuDien WHERE ChuDe="+"'"+ ChuDe +"' and Favorite = "+ fav + " ORDER BY random() LIMIT 1";
+        db = openHelper.getReadableDatabase();
+        c= db.rawQuery(query,null);
+        if (c.moveToFirst()) {
+            do {
+                Words temp = new Words();
+                temp.setTu(c.getString(0));
+                temp.setPhatAm(c.getString(1));
+                temp.setNghia(c.getString(2));
+                temp.setGhichu(c.getString(3));
+                temp.setChude(c.getString(4));
+                temp.setHard(c.getInt(5));
+                temp.setFavorite(c.getInt(6));
+                temp.setLearned(c.getInt(7));
+                questionList=(temp);
+            } while (c.moveToNext());
+        }
         c.close();
         return questionList;
     }
@@ -182,5 +204,34 @@ public class WordsDAO {
     {
         db = openHelper.getWritableDatabase();
         db.delete(TABLE_NAME,"Tu='"+key+"'",null);
+    }
+    public  int countFav(String ChuDe,int fav)
+    {
+        int questionList =0;
+        String query ="select count(tu) from TuDien WHERE ChuDe='"+ChuDe+"' and Favorite = "+fav;
+        db = openHelper.getReadableDatabase();
+        c= db.rawQuery(query,null);
+        if (c.moveToFirst()) {
+            do {
+                questionList = c.getInt(0);
+            } while (c.moveToNext());
+        }
+        c.close();
+        return questionList;
+    }
+    public Option getOption(String KEY,int fav)
+    {
+        Option questionList = new Option();
+        String query ="SELECT * FROM TuDien WHERE ChuDe="+"'"+ KEY +"' and Favorite = "+ fav + " ORDER BY random() LIMIT 1";
+        db = openHelper.getReadableDatabase();
+        c= db.rawQuery(query,null);
+        if (c.moveToFirst()) {
+            do {
+                questionList.setWord(c.getString(0));
+                questionList.setMean(c.getString(2));
+            } while (c.moveToNext());
+        }
+        c.close();
+        return questionList;
     }
 }

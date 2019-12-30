@@ -10,12 +10,14 @@ import androidx.lifecycle.ViewModelProviders;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
 import com.example.vocalearn.Entity.Words;
+import com.example.vocalearn.SharedReference.MyRF;
 import com.example.vocalearn.fragment.Home;
 import com.example.vocalearn.fragment.Search;
 import com.example.vocalearn.fragment.Test;
@@ -32,7 +34,8 @@ import java.io.OutputStream;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
-    BottomNavigationView bottomNavigationView;
+    private BottomNavigationView bottomNavigationView;
+    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,6 +46,8 @@ public class MainActivity extends AppCompatActivity {
         swapFragment(new Home());
         addControll();
         addEvent();
+        Toast toast = Toast.makeText(MainActivity.this,"Welcome "+ MyRF.LoadString(sp,"name"),Toast.LENGTH_SHORT);
+        toast.show();
     }
 
     private void addControll() {

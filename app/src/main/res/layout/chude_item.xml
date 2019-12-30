@@ -2,28 +2,38 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginEnd="8dp"
     android:layout_marginStart="8dp"
-    android:layout_marginTop="8dp">
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="8dp">
+
     <RelativeLayout
         android:id="@+id/item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="8dp">imgChuDe
-    <ImageView
-        android:id="@+id/imgChuDe"
-        android:layout_height="50dp"
-        android:layout_width="50dp">
+        android:padding="8dp">
 
-    </ImageView>
+        <ImageView
+            android:id="@+id/imgChuDe"
+            android:layout_width="50dp"
+            android:layout_height="50dp" />
 
         <TextView
             android:id="@+id/txtTenChuDe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentEnd="true"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large"
-            android:text="Chu De" />
+            android:text="Chu De"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+
+        <TextView
+            android:id="@+id/textTenChuDe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_below="@id/txtTenChuDe"
+            android:text="Chu De"
+             />
+
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>
