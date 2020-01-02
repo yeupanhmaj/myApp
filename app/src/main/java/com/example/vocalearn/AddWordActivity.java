@@ -55,7 +55,6 @@ public class AddWordActivity extends AppCompatActivity {
             radioButton.setChecked(selectLoaiTu[i]);
             rbGroup.addView(radioButton);
         }
-
     }
 
     private void addEvent() {

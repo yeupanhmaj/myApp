@@ -101,12 +101,18 @@ public class TuActivity extends AppCompatActivity {
                     updateFav(words,0);
                     words = getWords(words.getTu());
                     imgbtnFav.setBackground(getDrawable(R.drawable.ic_star_empty));
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("result",2);
+                    setResult(Activity.RESULT_OK,returnIntent);
                 }
                 else if(fav == 0)
                 {
                     updateFav(words,1);
                     words = getWords(words.getTu());
                     imgbtnFav.setBackground(getDrawable(R.drawable.ic_star_active));
+                    Intent returnIntent = new Intent();
+                    returnIntent.putExtra("result",2);
+                    setResult(Activity.RESULT_OK,returnIntent);
                 }
             }
         });

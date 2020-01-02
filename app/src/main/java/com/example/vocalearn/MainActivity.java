@@ -22,7 +22,11 @@ import com.example.vocalearn.fragment.Home;
 import com.example.vocalearn.fragment.Search;
 import com.example.vocalearn.fragment.Test;
 import com.example.vocalearn.fragment.User;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.InstanceIdResult;
 import com.microsoft.appcenter.AppCenter;
 import com.microsoft.appcenter.analytics.Analytics;
 import com.microsoft.appcenter.crashes.Crashes;
@@ -36,7 +40,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity {
     private BottomNavigationView bottomNavigationView;
     private SharedPreferences sp;
-
+    private String TAG ="1";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,8 +50,6 @@ public class MainActivity extends AppCompatActivity {
         swapFragment(new Home());
         addControll();
         addEvent();
-        Toast toast = Toast.makeText(MainActivity.this,"Welcome "+ MyRF.LoadString(sp,"name"),Toast.LENGTH_SHORT);
-        toast.show();
     }
 
     private void addControll() {

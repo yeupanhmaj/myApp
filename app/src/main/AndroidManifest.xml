@@ -26,9 +26,7 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <!-- Register the Alarm Receiver -->
-
+        </activity> <!-- Register the Alarm Receiver -->
         <activity android:name=".AddWordActivity" />
         <activity
             android:name=".ScheduleActivity"
@@ -50,9 +48,7 @@
             android:screenOrientation="portrait" />
         <activity
             android:name=".MainActivity"
-            android:screenOrientation="portrait">
-
-        </activity>
+            android:screenOrientation="portrait"></activity>
     </application>
 
 </manifest>

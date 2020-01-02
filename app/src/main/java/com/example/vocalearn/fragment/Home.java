@@ -64,7 +64,8 @@ public class Home extends Fragment implements ChudeAdapter.OnChuDeClickListener{
         chude=mylist.get(position).getTenChuDe();
         Intent intent = new Intent(getActivity(), QuizActivity.class);
         intent.putExtra("ChuDe",chude);
-        intent.putExtra(PRACTICE_MODE, r.nextInt(3)+1);
+        int mode = r.nextInt(3);
+        intent.putExtra(PRACTICE_MODE, mode);
         startActivityForResult(intent, REQUEST_CODE_QUIZ);
     }
 }

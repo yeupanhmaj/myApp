@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorBackground"
-    android:padding="16dp">
+    android:padding="10dp">
 
     <TextView
         android:id="@+id/text_view_score"
@@ -39,7 +37,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/group_question"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="60dp"
         android:layout_centerVertical="true">
     <RadioButton
         android:id="@+id/radio_button1"
@@ -47,7 +45,8 @@
         android:layout_height="wrap_content"
         android:freezesText="true"
         android:text="Option 1"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large" />
+        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+        />
 
     <RadioButton
         android:id="@+id/radio_button2"
@@ -57,7 +56,8 @@
         android:layout_below="@id/radio_button1"
         android:layout_marginTop="15dp"
         android:freezesText="true"
-        android:text="Option 2" />
+        android:text="Option 2"
+        />
 
     <RadioButton
         android:id="@+id/radio_button3"
@@ -67,7 +67,8 @@
         android:layout_below="@id/radio_button2"
         android:layout_marginTop="15dp"
         android:freezesText="true"
-        android:text="Option 3" />
+        android:text="Option 3"
+        />
     </RadioGroup>
     <Button
         android:id="@+id/button_confirm_next"
@@ -76,13 +77,14 @@
         android:layout_alignParentBottom="true"
         android:freezesText="true"
         android:background="@drawable/btn_background"
-        android:text="Confirm" />
+        android:text="Confirm"
+        android:textSize="20dp"/>
 
     <LinearLayout
         android:id="@+id/group_question"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="250dp"
+        android:layout_marginTop="150dp"
         android:layout_marginLeft="20dp"
         android:layout_marginRight="20dp"
         android:orientation="vertical">
@@ -96,7 +98,7 @@
             android:text="Here will be the question text"
             android:textAlignment="center"
             android:textColor="@android:color/black"
-            android:textSize="30dp" />
+            android:textSize="40dp" />
 
         <ImageButton
             android:id="@+id/button_speak"

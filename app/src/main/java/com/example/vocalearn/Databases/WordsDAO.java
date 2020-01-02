@@ -26,7 +26,7 @@ public class WordsDAO {
     private SQLiteOpenHelper openHelper;
     private SQLiteDatabase db;
     private static WordsDAO instance;
-    Cursor c = null;
+    private Cursor c = null;
 
     private WordsDAO(Context context)
     {
@@ -216,6 +216,30 @@ public class WordsDAO {
                 questionList = c.getInt(0);
             } while (c.moveToNext());
         }
+        c.close();
+        return questionList;
+    }
+    public List<Words> getAllFavoriteWords()
+    {
+        List<Words> questionList = new ArrayList<>();
+        db = openHelper.getReadableDatabase();
+        String query = "Select * from Tudien Where Favorite = 1";
+        c= db.rawQuery(query,null);
+        if (c.moveToFirst()) {
+            do {
+                Words temp = new Words();
+                temp.setTu(c.getString(0));
+                temp.setPhatAm(c.getString(1));
+                temp.setNghia(c.getString(2));
+                temp.setGhichu(c.getString(3));
+                temp.setChude(c.getString(4));
+                temp.setHard(c.getInt(5));
+                temp.setFavorite(c.getInt(6));
+                temp.setLearned(c.getInt(7));
+                questionList.add(temp);
+            } while (c.moveToNext());
+        }
+
         c.close();
         return questionList;
     }

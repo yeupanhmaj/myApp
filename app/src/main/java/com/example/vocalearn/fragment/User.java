@@ -2,6 +2,7 @@ package com.example.vocalearn.fragment;
 
 import android.app.Activity;
 import android.app.AlarmManager;
+import android.app.IntentService;
 import android.app.Notification;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -45,6 +46,7 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.preference.PreferenceManager;
 
+import com.example.vocalearn.Main2Activity;
 import com.example.vocalearn.MainActivity;
 import com.example.vocalearn.MyApplication;
 import com.example.vocalearn.R;
@@ -98,7 +100,7 @@ public class User extends Fragment {
     private SharedPreferences sp;
     private ImageButton btnEditTen;
     private EditText name;
-    private Button btnClearRef;
+    private Button btnClearRef,btnGetFavWords;
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
@@ -223,6 +225,13 @@ public class User extends Fragment {
                 name.setText("Enter your name here");
             }
         });
+        btnGetFavWords.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Main2Activity.class);
+                startActivity(intent);
+            }
+        });
     }
     public String getFormatedTime(int h, int m) {
         final String OLD_FORMAT = "HH:mm";
@@ -250,6 +259,7 @@ public class User extends Fragment {
         btnEditTen = view.findViewById(R.id.btnEditTen);
         name = view.findViewById(R.id.Name);
         btnClearRef = view.findViewById(R.id.btnClearRef);
+        btnGetFavWords = view.findViewById(R.id.btnGetFavWords);
     }
 
 }

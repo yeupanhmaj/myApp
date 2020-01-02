@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "490481593578",
+    "firebase_url": "https://vocalearn-f686d.firebaseio.com",
+    "project_id": "vocalearn-f686d",
+    "storage_bucket": "vocalearn-f686d.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:490481593578:android:7d3df77200c46ba305bb93",
+        "android_client_info": {
+          "package_name": "com.example.vocalearn"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "490481593578-hh0fkukhohkjhtfoaea8b0i3gtcbfnr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAmlBzQnWLT7ElUAwjuISpXoWrHPp8cGTM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "490481593578-hh0fkukhohkjhtfoaea8b0i3gtcbfnr3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

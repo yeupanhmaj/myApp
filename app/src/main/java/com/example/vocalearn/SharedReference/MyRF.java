@@ -30,7 +30,7 @@ public class MyRF {
 
     public static String LoadString(SharedPreferences sp,String key) {
         sp = PreferenceManager.getDefaultSharedPreferences(MyApplication.getContext());
-        return sp.getString(key, "Enter your name here");
+        return sp.getString(key, "");
     }
     public static void clear(SharedPreferences sp)
     {
